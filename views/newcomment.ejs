@@ -1,0 +1,17 @@
+<% include partials/header.ejs %>
+
+
+
+<form action="/blogs/<%= blog._id %>/comments" method="POST">
+  <div class="container">
+   <div class="form-group  w-50 mx-auto">
+   
+    <label for="exampleFormControlTextarea1">Comment textarea</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comment[text]"></textarea>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+   
+ </div>
+</form>    
+
+<% include partials/footer.ejs %>

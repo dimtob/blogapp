@@ -1,0 +1,40 @@
+<% include partials/header.ejs %>
+
+
+
+
+
+    <section id="header" class="jumbotron text-center">
+        <h1 class="display-3">BLOGS</h1>
+        <p class="lead">MALAKA SAMPANH GRINDARO KAI GRINDARO KAI DE BGAINEI RE</p>
+        <a href="/blogs/new" class="btn btn-primary">CREATE</a>
+        <a href="" class="btn btn-success">LOGIN</a>
+    </section>
+
+    <section id="gallery">
+       <div class="container">
+            <div class="row">
+                <%blogs.forEach(function(blog){%>
+                <div class="col-lg-4 mb-4">
+                    <div class="card">
+                        <img class="card-img-top" src="<%=blog.image%>" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title"><%=blog.title%></h5>
+                            <p class="card-text"> <%=blog.text.substring(0, 30)%></p>
+                            <a href="/blogs/<%=blog._id%>" class="btn btn-outline-success btn-sm">DETAILS</a>
+                            <% if (currentUser && currentUser._id.equals(blog.author.id)){%>
+                                     <form action="/blogs/<%=blog._id%>?_method=DELETE" method="POST" class="d-inline">
+                                           <button  class="btn btn-outline-danger btn-sm" >DELETE </button>
+                                     </form>
+                                     <a href="/blogs/<%=blog._id%>/edit" class="btn btn-outline-success btn-sm">UPDATE</a>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+              <% });%>
+            </div>
+       </div>
+    </section>
+
+
+<% include partials/footer.ejs %>

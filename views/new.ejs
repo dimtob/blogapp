@@ -1,0 +1,30 @@
+<% include partials/header.ejs %>
+
+
+    <div class="container mt-5">
+       <form action="/blogs" method="POST">
+  <div class="form-group">
+    <label for="exampleFormControlInput1">TITLE</label>
+    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="title" name="blog[title]">
+  </div>
+ 
+  <div class="form-group">
+     <label for="exampleFormControlInput1">IMAGE</label>
+    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="image URL" name="blog[image]">
+  </div>
+  
+ 
+ 
+ 
+ 
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">blog textarea</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="blog[text]"></textarea>
+  </div>
+   <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+    </div>
+
+
+    
+<% include partials/footer.ejs %>
