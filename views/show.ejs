@@ -11,9 +11,9 @@
                          <p class="card-text"> <%=blog.text%></p>
                          <p> Created By: <em> <%=blog.author.username%> </em> </p>
                           <% if (currentUser && currentUser._id.equals(blog.author.id)){%>
-                                 <form action="blogs/<%=blog._id%>?_method=DELETE" method="POST" class="d-inline">
-                                      <button  class="btn btn-outline-danger btn-sm" >DELETE </button>
-                                 </form>
+                                 <form action="/blogs/<%=blog._id%>?_method=DELETE" method="POST" class="d-inline">
+                                           <button  class="btn btn-outline-danger btn-sm" >DELETE </button>
+                                     </form>
                                  <a href="/blogs/<%=blog._id%>/edit" class="btn btn-outline-success btn-sm">UPDATE</a>
                           <% } %>
                         <a href="/blogs/<%=blog._id%>/comments/new" class="btn btn-outline-success btn-sm">ADD COMMENT</a>

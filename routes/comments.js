@@ -24,7 +24,7 @@ router.get("/blogs/:id/comments/new", mdleWareObject.isLoggedIn, function (req,r
 router.post("/blogs/:id/comments", mdleWareObject.isLoggedIn, function(req,res){
     var x=req.params.id
     Blog.findById(req.params.id, function(err,found){
-        if (err || !found){
+        if (err){
            req.flash("error", err.message)
              res.redirect("back");
         }else{
@@ -50,7 +50,7 @@ router.post("/blogs/:id/comments", mdleWareObject.isLoggedIn, function(req,res){
 
 router.get("/blogs/:id/comments/:comment_id/edit", mdleWareObject.authorizeC, function (req,res){
     Blog.findById(req.params.id, function(err, campground){
-       if(err || !campground){
+       if(err){
            req.flash("error", err.message)
            res.redirect("back");
        } else {
@@ -68,7 +68,7 @@ router.get("/blogs/:id/comments/:comment_id/edit", mdleWareObject.authorizeC, fu
 
 router.put("/blogs/:id/comments/:comment_id/",  mdleWareObject.authorizeC, function(req, res){
        Blog.findById(req.params.id, function(err, campground){
-       if(err || !campground){
+       if(err){
            req.flash("error", err.message)
            res.redirect("back");
        } else {
@@ -77,7 +77,9 @@ router.put("/blogs/:id/comments/:comment_id/",  mdleWareObject.authorizeC, funct
                           req.flash("error", err.message)
                          res.redirect("back");
                       }  else {
-                          console.log(req.body.comment)
+                        updatedcomment.author.id = req.user._id;
+                        updatedcomment.author.username = req.user.username;
+                        updatedcomment.save();
                           res.redirect("/blogs/"+req.params.id);
                           
         }
@@ -89,17 +91,16 @@ router.put("/blogs/:id/comments/:comment_id/",  mdleWareObject.authorizeC, funct
 
 router.delete("/blogs/:id/comments/:comment_id",  mdleWareObject.authorizeC, function (req,res){
        Blog.findById(req.params.id, function(err, campground){
-       if(err || !campground){
+       if(err){
            console.log(err);
-           res.redirect("/campgrounds");
+           res.redirect("/blogs");
        } else {
             Comment.findByIdAndRemove(req.params.comment_id, function(err){
                  if(err){
                       req.flash("error", err.message)
                         res.redirect("back");
                      }else{
-                         res.redirect("/");
-                          res.redirect("/blogs/"+req.params.id);
+                         res.redirect("/blogs/"+req.params.id);
         
 
                          

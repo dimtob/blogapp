@@ -28,7 +28,7 @@ router.get("/blogs/new",mdleWareObject.isLoggedIn ,function(req,res){
 router.post("/blogs",mdleWareObject.isLoggedIn, function(req,res){
     
     Blog.create(req.body.blog, function(err,newBlog){
-        if(err || !newBlog){
+        if(err){
             req.flash("error", err.message)
             res.redirect("back")
         }else{
@@ -45,7 +45,7 @@ router.post("/blogs",mdleWareObject.isLoggedIn, function(req,res){
 
 router.get("/blogs/:id", function (req,res){
    Blog.findById(req.params.id).populate("comments").exec(function(err, found){
-        if(err || !found){
+        if(err){
              req.flash("error", err.message)
              res.redirect("back");
         }else{
@@ -58,7 +58,7 @@ router.get("/blogs/:id", function (req,res){
 
 router.get("/blogs/:id/edit",mdleWareObject.authorizeB, function (req,res){
     Blog.findById(req.params.id, function (err, found){
-        if(err || !found){
+        if(err){
              req.flash("error", err.message)
              res.redirect("back");
         }else{
@@ -70,7 +70,7 @@ router.get("/blogs/:id/edit",mdleWareObject.authorizeB, function (req,res){
 //EDIT ROUTE PUT
 router.put("/blogs/:id", mdleWareObject.authorizeB ,function(req, res){
     Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog){
-       if(err || !updatedBlog){
+       if(err){
              req.flash("error", err.message)
              res.redirect("back");
       }  else {
@@ -85,7 +85,7 @@ router.put("/blogs/:id", mdleWareObject.authorizeB ,function(req, res){
 
 router.delete("/blogs/:id", mdleWareObject.authorizeB, function (req,res){
     Blog.findByIdAndRemove(req.params.id, function(err, found){
-        if(err || !found){
+        if(err){
           req.flash("error", err.message)
           res.redirect("back");
         }else{

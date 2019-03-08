@@ -16,7 +16,7 @@ mdleWareObject.isLoggedIn=function (req, res, next){
 mdleWareObject.authorizeC= function(req, res, next){
     if(req.isAuthenticated()){
         Comment.findById(req.params.comment_id, function(err, found) {
-            if(err || !found){
+            if(err){
                 req.flash("error", "Campground not Found")
                res.redirect("back");
             }else{
@@ -38,8 +38,8 @@ mdleWareObject.authorizeC= function(req, res, next){
     
 mdleWareObject.authorizeB= function(req, res, next){
     if(req.isAuthenticated()){
-        Blog.findById(req.params.comment_id, function(err, found) {
-            if(err || !found){
+        Blog.findById(req.params.id, function(err, found) {
+            if(err){
                req.flash("error", "Campground not Found")
                res.redirect("back");
             }else{
