@@ -22,9 +22,10 @@ var flash= require("connect-flash");
 
 
 //SET UP //------------------------------------------------------
+console.log(process.env.DATABASEURL)
 
-//mongoose.connect("mongodb://localhost/YourDB", { useNewUrlParser: true });
-mongoose.connect("mongodb+srv://dim_tob:whitewater@cluster0-j1bzc.mongodb.net/test?retryWrites=true", { useNewUrlParser: true });
+mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true });
+//mongoose.connect("mongodb+srv://dim_tob:whitewater@cluster0-j1bzc.mongodb.net/test?retryWrites=true", { useNewUrlParser: true });
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
 app.use(express.static("public"));
